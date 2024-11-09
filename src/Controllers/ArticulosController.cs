@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using suris.api.src.Services;
 
 namespace suris.api.Controllers;
 
@@ -6,13 +7,14 @@ namespace suris.api.Controllers;
 [Route("api/[controller]")]
 public class ArticulosController : ControllerBase
 {
-    public ArticulosController()
+    private readonly IArticuloService _articuloService;
+    public ArticulosController(IArticuloService articuloService)
     {
-
+        _articuloService = articuloService;
     }
     [HttpGet]
-    public async Task<ActionResult> getArticulosByDeposito([FromQuery] int deposito)
+    public ActionResult getArticulosByDeposito([FromQuery] int deposito)
     {
-        return Ok();
+        return Ok(_articuloService.GetArticulosByDeposito(deposito));
     }
 }
