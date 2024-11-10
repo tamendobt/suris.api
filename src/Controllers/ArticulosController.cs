@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using suris.api.src.Models;
 using suris.api.src.Services;
 
 namespace suris.api.Controllers;
@@ -15,6 +16,7 @@ public class ArticulosController : ControllerBase
     [HttpGet]
     public ActionResult getArticulosByDeposito([FromQuery] int deposito)
     {
-        return Ok(_articuloService.GetArticulosByDeposito(deposito));
+        List<Articulo> response = _articuloService.GetArticulosByDeposito(deposito);
+        return Ok(response);
     }
 }

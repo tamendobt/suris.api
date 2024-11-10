@@ -9,14 +9,22 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
+        builder.Services.AddCors();
         builder.Services.AddControllers();
         builder.Services.AddScoped<IArticuloService, ArticuloService>();
+        builder.Services.AddScoped<IPedidoService, PedidoService>();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
 
-        app.UseHttpsRedirection();
+        app.UseCors(
+       options =>
+         options
+           .WithOrigins("http://localhost:5173")
+           .AllowAnyHeader()
+           .WithMethods("GET", "POST")
+           .AllowCredentials()
+     );
 
         app.UseAuthorization();
 

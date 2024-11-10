@@ -13,7 +13,7 @@ public class ArticuloService : IArticuloService
     {
         List<Articulo> articulos = DataHelper.GenerateArticulos();
 
-        List<Articulo> articulosByDeposito = articulos.Where(a => a.Deposito == deposito && !a.Codigo.Any(ch => !char.IsLetterOrDigit(ch) && a.Precio > 0)).ToList();
+        List<Articulo> articulosByDeposito = articulos.Where(a => a.Deposito == deposito).ToList();
         return articulosByDeposito;
     }
 }
